@@ -1,6 +1,7 @@
 package com.microservices.loans.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,8 @@ import lombok.Setter;
 @Table(name = "loans")
 @Getter
 @Setter
-public class LoansEntity {
+@Builder
+public class LoansEntity extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
