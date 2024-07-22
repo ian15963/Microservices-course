@@ -17,13 +17,13 @@ public class CardMapper {
     }
 
     public static CardEntity toEntity(CardDto dto){
-        CardEntity entity = new CardEntity();
-        entity.setAmountUsed(dto.getAmountUsed());
-        entity.setCardType(dto.getCardType());
-        entity.setCardNumber(dto.getCardNumber());
-        entity.setMobileNumber(dto.getMobileNumber());
-        entity.setTotalLimit(dto.getTotalLimit());
-        entity.setAvailableAmount(dto.getAvailableAmount());
-        return entity;
+        return CardEntity.builder()
+                .amountUsed(dto.getAmountUsed())
+                .cardType(dto.getCardType())
+                .cardNumber(dto.getCardNumber())
+                .mobileNumber(dto.getMobileNumber())
+                .totalLimit(dto.getTotalLimit())
+                .availableAmount(dto.getAvailableAmount())
+                .build();
     }
 }

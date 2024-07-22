@@ -6,14 +6,14 @@ import com.microservices.loans.entity.LoansEntity;
 public class LoansMapper {
 
     public static LoansEntity toEntity(LoansDto dto){
-        LoansEntity entity = new LoansEntity();
-        entity.setAmountPaid(dto.getAmountPaid());
-        entity.setLoanNumber(dto.getLoanNumber());
-        entity.setLoanType(dto.getLoanType());
-        entity.setTotalLoan(dto.getTotalLoan());
-        entity.setMobileNumber(dto.getMobileNumber());
-        entity.setOutstandingAmount(dto.getOutstandingAmount());
-        return entity;
+        return LoansEntity.builder()
+                .amountPaid(dto.getAmountPaid())
+                .loanNumber(dto.getLoanNumber())
+                .loanType(dto.getLoanType())
+                .totalLoan(dto.getTotalLoan())
+                .mobileNumber(dto.getMobileNumber())
+                .outstandingAmount(dto.getOutstandingAmount())
+                .build();
     }
 
     public static LoansDto toDto(LoansEntity entity){
