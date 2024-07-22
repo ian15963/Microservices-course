@@ -17,7 +17,7 @@ public class AccountDto {
     @Schema(
             description = "Account Number of Eazy Bank account", example = "3454433243"
     )
-    private Long accountNumber;
+    private Integer accountNumber;
 
     @NotBlank(message = "AccountType can not be a null or empty")
     @Schema(
