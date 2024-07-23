@@ -25,9 +25,9 @@ public class LoansControllerImpl implements ILoansController {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> fetchLoan(String mobileNumber) {
+    public ResponseEntity<LoansDto> fetchLoan(String mobileNumber) {
         LoansDto dto = service.fetchLoan(mobileNumber);
-        return ResponseEntity.ok(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
+        return ResponseEntity.ok(dto);
     }
 
     @Override

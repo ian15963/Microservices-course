@@ -1,7 +1,8 @@
-package com.microservices.loans.controller;
-import com.microservices.loans.dto.ErrorResponseDto;
-import com.microservices.loans.dto.LoansDto;
-import com.microservices.loans.dto.ResponseDto;
+package com.microservices.account.controller;
+
+import com.microservices.account.dto.CustomerDto;
+import com.microservices.account.dto.ErrorResponseDto;
+import com.microservices.account.dto.ResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,15 +16,15 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(
-        name = "CRUD REST APIs for Loans in EazyBank",
-        description = "CRUD REST APIs in EazyBank to CREATE, UPDATE, FETCH AND DELETE loan details"
+        name = "CRUD REST APIs for Accounts in EazyBank",
+        description = "CRUD REST APIs in EazyBank to CREATE, UPDATE, FETCH AND DELETE account details"
 )
 @Validated
-public interface ILoansController {
+public interface IAccountController {
 
     @Operation(
-            summary = "Create Loan REST API",
-            description = "REST API to create new loan inside EazyBank"
+            summary = "Create Account REST API",
+            description = "REST API to create new Customer &  Account inside EazyBank"
     )
     @ApiResponses({
             @ApiResponse(
@@ -40,13 +41,11 @@ public interface ILoansController {
     }
     )
     @PostMapping("/create")
-    ResponseEntity<ResponseDto> createLoan(@RequestParam
-                                           @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
-                                           String mobileNumber);
+    ResponseEntity<ResponseDto> create(@Valid @RequestBody CustomerDto dto);
 
     @Operation(
-            summary = "Fetch Loan Details REST API",
-            description = "REST API to fetch loan details based on a mobile number"
+            summary = "Fetch Account Details REST API",
+            description = "REST API to fetch Customer &  Account details based on a mobile number"
     )
     @ApiResponses({
             @ApiResponse(
@@ -63,13 +62,13 @@ public interface ILoansController {
     }
     )
     @GetMapping("/fetch")
-    ResponseEntity<LoansDto> fetchLoan(@RequestParam
-                                          @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
-                                          String mobileNumber);
+    ResponseEntity<CustomerDto> fetch(@RequestParam
+                                      @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                      String mobileNumber);
 
     @Operation(
-            summary = "Update Loan Details REST API",
-            description = "REST API to update loan details based on a loan number"
+            summary = "Update Account Details REST API",
+            description = "REST API to update Customer &  Account details based on a account number"
     )
     @ApiResponses({
             @ApiResponse(
@@ -90,11 +89,12 @@ public interface ILoansController {
     }
     )
     @PutMapping("/update")
-    ResponseEntity<ResponseDto> updateLoans(@Valid @RequestBody LoansDto loansDto);
+    ResponseEntity<ResponseDto> update(@Valid @RequestBody CustomerDto dto);
+
 
     @Operation(
-            summary = "Delete Loan Details REST API",
-            description = "REST API to delete Loan details based on a mobile number"
+            summary = "Delete Account & Customer Details REST API",
+            description = "REST API to delete Customer &  Account details based on a mobile number"
     )
     @ApiResponses({
             @ApiResponse(
@@ -115,8 +115,9 @@ public interface ILoansController {
     }
     )
     @DeleteMapping("/delete")
-    ResponseEntity<ResponseDto> deleteLoan(@RequestParam
-                                           @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
-                                           String mobileNumber);
+    ResponseEntity<ResponseDto> delete(@RequestParam
+                                       @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                       String mobileNumber);
+
 
 }

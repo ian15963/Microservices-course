@@ -25,9 +25,9 @@ public class CardControllerImpl implements ICardController {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> fetchCard(String mobileNumber) {
+    public ResponseEntity<CardDto> fetchCard(String mobileNumber) {
         CardDto card = service.fetch(mobileNumber);
-        return ResponseEntity.ok(new ResponseDto(CardConstants.STATUS_200, CardConstants.MESSAGE_200));
+        return ResponseEntity.ok(card);
     }
 
     @Override

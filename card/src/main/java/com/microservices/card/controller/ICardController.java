@@ -59,7 +59,7 @@ public interface ICardController {
             )
     })
     @GetMapping("/fetch")
-    ResponseEntity<ResponseDto> fetchCard(@RequestParam("mobileNumber")
+    ResponseEntity<CardDto> fetchCard(@RequestParam("mobileNumber")
                                           @Pattern(regexp = "(^$|[0-9]{10})", message = "CardNumber must be 10 digits")
                                           String mobileNumber);
 
