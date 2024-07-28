@@ -2,10 +2,13 @@ package com.microservices.account.controller.impl;
 
 import com.microservices.account.constant.AccountConstant;
 import com.microservices.account.controller.IAccountController;
+import com.microservices.account.dto.AccountContactInfoDto;
 import com.microservices.account.dto.CustomerDto;
 import com.microservices.account.dto.ResponseDto;
 import com.microservices.account.service.IAccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountControllerImpl implements IAccountController {
 
     private final IAccountService service;
+    private final Environment environment;
+    private final AccountContactInfoDto contactInfoDto;
+
+    @Value("${build.version}")
+    private String buildVersion;
 
     @Override
     public ResponseEntity<ResponseDto> create(CustomerDto dto) {
@@ -47,4 +55,21 @@ public class AccountControllerImpl implements IAccountController {
         }
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseDto(AccountConstant.STATUS_417, AccountConstant.MESSAGE_417_DELETE));
     }
+
+    @Override
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity.ok(buildVersion);
+    }
+
+    @Override
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity.ok(environment.getProperty("JAVA_HOME"));
+    }
+
+    @Override
+    public ResponseEntity<AccountContactInfoDto> getContactInfo() {
+        return ResponseEntity.ok(contactInfoDto);
+    }
+
+
 }
