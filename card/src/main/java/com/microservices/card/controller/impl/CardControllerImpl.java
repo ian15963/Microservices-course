@@ -2,10 +2,13 @@ package com.microservices.card.controller.impl;
 
 import com.microservices.card.constants.CardConstants;
 import com.microservices.card.controller.ICardController;
+import com.microservices.card.dto.CardContactInfoDto;
 import com.microservices.card.dto.CardDto;
 import com.microservices.card.dto.ResponseDto;
 import com.microservices.card.service.ICardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CardControllerImpl implements ICardController {
 
     private final ICardService service;
+    private final Environment enviroment;
+    private final CardContactInfoDto contactInfoDto;
+
+    @Value("${build.version}")
+    private String buildVersion;
 
     @Override
     public ResponseEntity<ResponseDto> createCard(CardDto dto) {
@@ -47,5 +55,20 @@ public class CardControllerImpl implements ICardController {
         }
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseDto(CardConstants.STATUS_417, CardConstants.MESSAGE_417_DELETE));
 
+    }
+
+    @Override
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity.ok(buildVersion);
+    }
+
+    @Override
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity.ok(enviroment.getProperty("JAVA_HOME"));
+    }
+
+    @Override
+    public ResponseEntity<CardContactInfoDto> getContactInfo() {
+        return ResponseEntity.ok(contactInfoDto);
     }
 }
