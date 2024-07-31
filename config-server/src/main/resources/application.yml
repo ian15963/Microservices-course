@@ -4,20 +4,23 @@ spring:
   application:
     name: config-server
   profiles:
-    active: native
-    #active: git
+#    active: native
+    active: git
   cloud:
     config:
       server:
-        native:
-          # Busca de configurações nos arquivos dentro do diretório config de resources
-          search-locations: "classpath:/config"
-          # Busca de configurações em um diretório específico da máquina
+#        native:
+          # Busca de configuraï¿½ï¿½es nos arquivos dentro do diretï¿½rio config de resources
+#          search-locations: "classpath:/config"
+          # Busca de configuraï¿½ï¿½es em um diretï¿½rio especï¿½fico da mï¿½quina
           # search-locations: file:///home/ian/Documents/Projetos/Configurations
-        # Busca de configurações localizadas em um repositório GIT.
-       #git:
-          #uri: https://github.com/Microservices-course
-          #default-label: config
-          #timeout: 5
-          #clone-on-start: true
-          #force-pull: true
+        # Busca de configuraï¿½ï¿½es localizadas em um repositï¿½rio GIT.
+       git:
+          uri: https://github.com/ian15963/Config-Server-Course-Files
+          default-label: main
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+
+encrypt:
+  key: "45D81EC1EF61DF9AD8D3E5BB397F9"
