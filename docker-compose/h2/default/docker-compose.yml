@@ -51,7 +51,7 @@ services:
       file: common-config.yml
       service: microservice-configserver-config
     environment:
-      SPRING_APPLICATION_NAME: eureka-server
+      SPRING_APPLICATION_NAME: eurekaserver
 
   accounts:
     image: "iansilvasptech/microservice-account"
@@ -59,6 +59,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
+      eurekaserver:
+        condition: service_healthy
       configserver:
         condition: service_healthy
     environment:
@@ -73,6 +75,8 @@ services:
     ports:
       - "8090:8090"
     depends_on:
+      eurekaserver:
+        condition: service_healthy
       configserver:
         condition: service_healthy
     environment:
@@ -87,6 +91,8 @@ services:
     ports:
       - "9000:9000"
     depends_on:
+      eurekaserver:
+        condition: service_healthy
       configserver:
         condition: service_healthy
     environment:

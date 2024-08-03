@@ -34,4 +34,4 @@ services:
     extends:
       service: rabbit-microservice-configserver
     environment:
-      SPRING_CLIENT_SERVICEURL_DEFAULTZONED: http://localhost:8070/eureka/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
