@@ -39,4 +39,13 @@ public class CustomerDto {
     )
     private AccountDto accountsDto;
 
+    @Schema(
+            description = "Loans details of the Customer"
+    )
+    private LoansDto loansDto;
+
+    @Schema(
+            description = "Cards details of the Customer"
+    )
+    private CardDto cardDto;
 }
