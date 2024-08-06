@@ -55,3 +55,9 @@ info:
     name: "Loans microservice"
     description: "Loans microservice"
     version: "1.0.0"
+
+logging:
+  level:
+    com:
+      microservices:
+        loans: DEBUG

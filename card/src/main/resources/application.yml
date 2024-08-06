@@ -49,3 +49,9 @@ info:
     name: "Card microservice"
     description: "Card microservice"
     version: "1.0.0"
+
+logging:
+  level:
+    com:
+      microservices:
+        card: DEBUG

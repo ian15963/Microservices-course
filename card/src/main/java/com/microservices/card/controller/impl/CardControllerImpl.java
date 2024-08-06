@@ -7,6 +7,8 @@ import com.microservices.card.dto.CardDto;
 import com.microservices.card.dto.ResponseDto;
 import com.microservices.card.service.ICardService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ public class CardControllerImpl implements ICardController {
     private final ICardService service;
     private final Environment enviroment;
     private final CardContactInfoDto contactInfoDto;
+    private final Logger logger = LoggerFactory.getLogger(CardControllerImpl.class);
 
     @Value("${build.version}")
     private String buildVersion;
@@ -35,6 +38,7 @@ public class CardControllerImpl implements ICardController {
     @Override
     public ResponseEntity<CardDto> fetchCard(String correlationId, String mobileNumber) {
         CardDto card = service.fetch(mobileNumber);
+        logger.debug("eazyBank-correlation-id found: {} ", correlationId);
         return ResponseEntity.ok(card);
     }
 

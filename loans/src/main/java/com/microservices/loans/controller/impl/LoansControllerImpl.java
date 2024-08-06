@@ -7,6 +7,8 @@ import com.microservices.loans.dto.LoansDto;
 import com.microservices.loans.dto.ResponseDto;
 import com.microservices.loans.service.ILoansService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ public class LoansControllerImpl implements ILoansController {
     private final ILoansService service;
     private final Environment environment;
     private final LoansContactInfoDto contactInfoDto;
+    private final Logger logger = LoggerFactory.getLogger(LoansControllerImpl.class);
 
     @Value("${build.version}")
     private String buildVersion;
@@ -35,7 +38,7 @@ public class LoansControllerImpl implements ILoansController {
     @Override
     public ResponseEntity<LoansDto> fetchLoan(String correlationId, String mobileNumber) {
         LoansDto dto = service.fetchLoan(mobileNumber);
-
+        logger.debug("eazyBank-correlation-id found: {} ", correlationId);
         return ResponseEntity.ok(dto);
     }
 
