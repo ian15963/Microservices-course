@@ -16,8 +16,8 @@ public class CustomerControllerImpl implements ICustomerController {
     private final ICustomerService customerService;
 
     @Override
-    public ResponseEntity<CustomerDto> fetAllCustomerDetails(String mobileNumber) {
-        CustomerDto dto = customerService.fetchCustomerDtoDetails(mobileNumber);
+    public ResponseEntity<CustomerDto> fetAllCustomerDetails(String correlationId, String mobileNumber) {
+        CustomerDto dto = customerService.fetchCustomerDtoDetails(correlationId, mobileNumber);
         return ResponseEntity.ok(dto);
     }
 }

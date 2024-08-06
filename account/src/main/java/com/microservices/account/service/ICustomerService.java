@@ -4,6 +4,6 @@ import com.microservices.account.dto.CustomerDto;
 
 public interface ICustomerService {
 
-    CustomerDto fetchCustomerDtoDetails(String mobileNumber);
+    CustomerDto fetchCustomerDtoDetails(String correlationId, String mobileNumber);
 
 }

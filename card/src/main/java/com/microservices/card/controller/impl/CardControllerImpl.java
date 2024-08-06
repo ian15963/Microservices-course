@@ -33,7 +33,7 @@ public class CardControllerImpl implements ICardController {
     }
 
     @Override
-    public ResponseEntity<CardDto> fetchCard(String mobileNumber) {
+    public ResponseEntity<CardDto> fetchCard(String correlationId, String mobileNumber) {
         CardDto card = service.fetch(mobileNumber);
         return ResponseEntity.ok(card);
     }

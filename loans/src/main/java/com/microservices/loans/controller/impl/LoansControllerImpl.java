@@ -33,8 +33,9 @@ public class LoansControllerImpl implements ILoansController {
     }
 
     @Override
-    public ResponseEntity<LoansDto> fetchLoan(String mobileNumber) {
+    public ResponseEntity<LoansDto> fetchLoan(String correlationId, String mobileNumber) {
         LoansDto dto = service.fetchLoan(mobileNumber);
+
         return ResponseEntity.ok(dto);
     }
 

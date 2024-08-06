@@ -64,9 +64,10 @@ public interface ILoansController {
     }
     )
     @GetMapping("/fetch")
-    ResponseEntity<LoansDto> fetchLoan(@RequestParam
-                                          @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
-                                          String mobileNumber);
+    ResponseEntity<LoansDto> fetchLoan(@RequestHeader("eazybank-correlation-id") String id,
+                                        @RequestParam
+                                        @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                        String mobileNumber);
 
     @Operation(
             summary = "Update Loan Details REST API",

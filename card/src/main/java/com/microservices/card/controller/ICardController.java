@@ -60,7 +60,8 @@ public interface ICardController {
             )
     })
     @GetMapping("/fetch")
-    ResponseEntity<CardDto> fetchCard(@RequestParam("mobileNumber")
+    ResponseEntity<CardDto> fetchCard(@RequestHeader("eazybank-correlation-id") String correlationId,
+                                          @RequestParam("mobileNumber")
                                           @Pattern(regexp = "(^$|[0-9]{10})", message = "CardNumber must be 10 digits")
                                           String mobileNumber);
 
