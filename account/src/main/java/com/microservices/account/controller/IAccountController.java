@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.TimeoutException;
+
 @Tag(
         name = "CRUD REST APIs for Accounts in EazyBank",
         description = "CRUD REST APIs in EazyBank to CREATE, UPDATE, FETCH AND DELETE account details"
@@ -65,7 +67,7 @@ public interface IAccountController {
     @GetMapping("/fetch")
     ResponseEntity<CustomerDto> fetch(@RequestParam
                                       @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
-                                      String mobileNumber);
+                                      String mobileNumber) throws TimeoutException;
 
     @Operation(
             summary = "Update Account Details REST API",

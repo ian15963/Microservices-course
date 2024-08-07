@@ -6,13 +6,18 @@ import com.microservices.account.dto.AccountContactInfoDto;
 import com.microservices.account.dto.CustomerDto;
 import com.microservices.account.dto.ResponseDto;
 import com.microservices.account.service.IAccountService;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.TimeoutException;
 
 @RestController
 @RequestMapping("/api")
@@ -22,6 +27,7 @@ public class AccountControllerImpl implements IAccountController {
     private final IAccountService service;
     private final Environment environment;
     private final AccountContactInfoDto contactInfoDto;
+    private final Logger logger = LoggerFactory.getLogger(AccountControllerImpl.class);
 
     @Value("${build.version}")
     private String buildVersion;
@@ -33,9 +39,16 @@ public class AccountControllerImpl implements IAccountController {
     }
 
     @Override
-    public ResponseEntity<CustomerDto> fetch(String mobileNumber) {
+    @Retry(name = "fetch", fallbackMethod = "fetchFallBack")
+    public ResponseEntity<CustomerDto> fetch(String mobileNumber) throws TimeoutException {
+        logger.debug("getBuildInfo() method Invoked");
         CustomerDto customerDto = service.fetchAccount(mobileNumber);
-        return ResponseEntity.ok(customerDto);
+        throw new TimeoutException();
+//        return ResponseEntity.ok(customerDto);
+    }
+
+    private ResponseEntity<String> fetchFallBack(Throwable t){
+        return ResponseEntity.ok("1.0");
     }
 
     @Override
