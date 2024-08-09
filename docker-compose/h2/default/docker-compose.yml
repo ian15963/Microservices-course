@@ -1,4 +1,15 @@
 services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
+      timeout: 10s
+      retries: 10
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
   rabbit:
     image: rabbitmq:3.13-management
     hostname: rabbitmq
@@ -130,6 +141,8 @@ services:
       cards:
         condition: service_healthy
       accounts:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "gateway"
