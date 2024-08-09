@@ -6,6 +6,7 @@ import com.microservices.account.dto.AccountContactInfoDto;
 import com.microservices.account.dto.CustomerDto;
 import com.microservices.account.dto.ResponseDto;
 import com.microservices.account.service.IAccountService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -75,8 +76,13 @@ public class AccountControllerImpl implements IAccountController {
     }
 
     @Override
+    @RateLimiter(name= "getJavaVersion", fallbackMethod = "javaVersionFallback")
     public ResponseEntity<String> getJavaVersion() {
         return ResponseEntity.ok(environment.getProperty("JAVA_HOME"));
+    }
+
+    public ResponseEntity<String> javaVersionFallBack(Throwable throwable){
+        return ResponseEntity.ok("JAVA 17");
     }
 
     @Override
