@@ -1,5 +1,6 @@
 package com.microservice.gateway.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +13,9 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity
 public class SecurityConfiguration {
 
+    @Autowired
+    private JwtConverter jwtConverter;
+
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity security){
         return security
@@ -19,7 +23,7 @@ public class SecurityConfiguration {
                         .pathMatchers("microservice/account/**").authenticated()
                         .pathMatchers("microservice/card/**").authenticated()
                         .pathMatchers("microservice/loan/**").authenticated())
-                .oauth2ResourceServer(Customizer.withDefaults())
+                .oauth2ResourceServer(resourceServer -> resourceServer.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)))
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .build();
     }
