@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Component
 public class JwtConverter implements Converter<Jwt, Mono<JwtAuthenticationToken>> {
 
     @Override
@@ -20,7 +19,7 @@ public class JwtConverter implements Converter<Jwt, Mono<JwtAuthenticationToken>
         List<String> roles = realmAccess.get("roles");
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         if(!roles.isEmpty()){
-            authorities = roles.stream().map(SimpleGrantedAuthority::new).toList();
+            authorities = roles.stream().map(authority -> new SimpleGrantedAuthority("ROLE_%s".formatted(authority))).toList();
         }
 
         return Mono.just(new JwtAuthenticationToken(jwt, authorities));

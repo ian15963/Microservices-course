@@ -13,17 +13,14 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity
 public class SecurityConfiguration {
 
-    @Autowired
-    private JwtConverter jwtConverter;
-
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity security){
         return security
                 .authorizeExchange(exchange -> exchange.pathMatchers(HttpMethod.GET).permitAll()
-                        .pathMatchers("microservice/account/**").authenticated()
-                        .pathMatchers("microservice/card/**").authenticated()
-                        .pathMatchers("microservice/loan/**").authenticated())
-                .oauth2ResourceServer(resourceServer -> resourceServer.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)))
+                        .pathMatchers("microservice/account/**").hasRole("ACCOUNT")
+                        .pathMatchers("microservice/card/**").hasRole("CARD")
+                        .pathMatchers("microservice/loan/**").hasRole("LOAN"))
+                .oauth2ResourceServer(resourceServer -> resourceServer.jwt(jwt -> jwt.jwtAuthenticationConverter(new JwtConverter())))
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .build();
     }
