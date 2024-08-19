@@ -8,9 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
+        <module name="loans" />
+        <module name="message" />
         <module name="eureka-server" />
         <module name="card" />
-        <module name="loans" />
         <module name="account" />
         <module name="gateway" />
       </profile>
@@ -24,6 +25,7 @@
       <module name="eureka-server" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="loans" options="-parameters" />
+      <module name="message" options="-parameters" />
     </option>
   </component>
 </project>
