@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee6acf08-0f33-401a-b053-d16485af05b5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose/h2/prod/common-config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/h2/prod/common-config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose/h2/prod/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/h2/prod/docker-compose.yml" afterDir="false" />
-    </list>
+    <list default="true" id="ee6acf08-0f33-401a-b053-d16485af05b5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
