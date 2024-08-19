@@ -1,6 +1,7 @@
 package com.microservices.account.service.impl;
 
 import com.microservices.account.constant.AccountConstant;
+import com.microservices.account.dto.AccountMessageDto;
 import com.microservices.account.dto.CustomerDto;
 import com.microservices.account.entity.AccountEntity;
 import com.microservices.account.entity.CustomerEntity;
@@ -12,6 +13,9 @@ import com.microservices.account.repository.AccountRepository;
 import com.microservices.account.repository.CustomerRepository;
 import com.microservices.account.service.IAccountService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,6 +27,8 @@ public class AccountServiceImpl implements IAccountService {
 
     private final AccountRepository accountRepository;
     private final CustomerRepository customerRepository;
+    private final StreamBridge streamBridge;
+    private final Logger log = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     @Override
     public void createAccount(CustomerDto customerDto) {
@@ -32,8 +38,8 @@ public class AccountServiceImpl implements IAccountService {
         }
         CustomerEntity newCustomer = CustomerMapper.toEntity(customerDto);
         newCustomer = customerRepository.save(newCustomer);
-        accountRepository.save(createNewAccount(newCustomer));
-
+        AccountEntity newAccount = accountRepository.save(createNewAccount(newCustomer));
+        sendCommunication(newAccount, newCustomer);
     }
 
     @Override
@@ -80,5 +86,24 @@ public class AccountServiceImpl implements IAccountService {
         return true;
     }
 
+    @Override
+    public boolean updateCommunicationStatus(Integer accountNumber) {
+        boolean isUpdated = false;
+        if(accountNumber != null){
+            AccountEntity account = accountRepository.findById(accountNumber).orElseThrow(ResourceNotFoundException::new);
+            account.setCommunicationSw(true);
+            accountRepository.save(account);
+            isUpdated = true;
+        }
+        return isUpdated;
+    }
+
+    private void sendCommunication(AccountEntity account, CustomerEntity customer) {
+        var accountsMsgDto = new AccountMessageDto(account.getAccountNumber(), customer.getName(),
+                customer.getEmail(), customer.getMobileNumber());
+        log.info("Sending Communication request for the details: {}", accountsMsgDto);
+        var result = streamBridge.send("sendCommunication-out-0", accountsMsgDto);
+        log.info("Is the Communication request successfully triggered ? : {}", result);
+    }
 
 }

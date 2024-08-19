@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee6acf08-0f33-401a-b053-d16485af05b5" name="Changes" comment="" />
+    <list default="true" id="ee6acf08-0f33-401a-b053-d16485af05b5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/account/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/src/main/java/com/microservices/account/entity/AccountEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/account/src/main/java/com/microservices/account/entity/AccountEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/src/main/java/com/microservices/account/service/IAccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/account/src/main/java/com/microservices/account/service/IAccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/src/main/java/com/microservices/account/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/account/src/main/java/com/microservices/account/service/impl/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/account/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/message/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/message/src/main/resources/application.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +22,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
@@ -46,7 +56,7 @@
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.MessageApplication">
+  <component name="RunManager" selected="Application.AccountApplication">
     <configuration name="AccountApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.microservices.account.AccountApplication" />
       <module name="account" />
@@ -60,12 +70,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.microservices.card.CardApplication" />
-      <module name="card" />
+    <configuration name="ConfigServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.microservices.config_server.ConfigServerApplication" />
+      <module name="config-server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.microservices.card.*" />
+          <option name="PATTERN" value="com.microservices.config_server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -114,11 +124,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AccountApplication" />
         <item itemvalue="Application.MessageApplication" />
+        <item itemvalue="Application.ConfigServerApplication" />
         <item itemvalue="Application.GatewayApplication" />
         <item itemvalue="Application.LoansApplication" />
-        <item itemvalue="Application.CardApplication" />
-        <item itemvalue="Application.AccountApplication" />
       </list>
     </recent_temporary>
   </component>

@@ -21,4 +21,6 @@ public class AccountEntity extends BaseEntity{
     private String branchAddress;
 
     private Integer customerId;
+
+    private Boolean communicationSw;
 }
