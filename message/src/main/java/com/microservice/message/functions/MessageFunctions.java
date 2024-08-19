@@ -11,7 +11,7 @@ import java.util.function.Function;
 @Configuration
 public class MessageFunctions {
 
-    private static final Logger logger = LoggerFactory.getLogger(MessageFunctions.class)
+    private static final Logger logger = LoggerFactory.getLogger(MessageFunctions.class);
 
     @Bean
     public Function<AccountMessageDto, AccountMessageDto> email(){
@@ -24,7 +24,7 @@ public class MessageFunctions {
     @Bean
     public Function<AccountMessageDto, Long> sms(){
         return accountDto -> {
-            logger.info("Sending sms with the details: " accountDto.toString());
+            logger.info("Sending sms with the details: " + accountDto.toString());
             return accountDto.accountNumber();
         };
     }
